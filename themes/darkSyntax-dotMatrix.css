@@ -1,0 +1,197 @@
+/* dotMatrix-tractorFeed.css - Dot Matrix Printer / Tractor Feed Theme (Gradient Background v3) */
+
+@font-face {
+  font-family: 'Tractorfeed';
+  src: url('TractorFeedSans-SmCn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 0;
+  background: #f8f8f8;
+  border: 1px dashed #aaaaaa;
+  box-shadow: none;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #eeeeee;
+  border-bottom: 1px dashed #aaaaaa;
+  font-family: 'Tractorfeed', monospace;
+  font-size: 14px;
+  color: #333333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ds-title-left code {
+  color: #555555;
+  font-family: 'Tractorfeed', monospace;
+  font-size: 18px;
+  background: none;
+  padding: 0;
+  font-weight: normal;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: 1px solid #cccccc;
+  color: #555555;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+  font-family: 'Tractorfeed', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.ds-btn:hover {
+  background: #dddddd;
+  color: #222222;
+}
+
+.ds-btn.ds-success {
+  color: #008800;
+  border-color: #008800;
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  background: transparent;
+}
+
+.ds-line-numbers {
+  user-select: none;
+  /* Use explicit pixel value for line-height and match padding to that */
+  line-height: 1.5; /* Back to 1.5 for 31.5px */
+  padding: 21px 12px 21px 16px; /* Vertical padding matches pre[code] */
+  text-align: right;
+  color: #888888;
+  font-family: 'Tractorfeed', monospace;
+  font-size: 21px; /* Match code font size */
+  background: #e0e0e0;
+  border-right: 1px dashed #aaaaaa;
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+  background: #e0e0e0;
+  line-height: inherit; /* Ensure line number height matches code lines */
+}
+
+
+pre[code] {
+  margin: 0;
+  padding: 21px; /* Keep this padding */
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Tractorfeed', monospace;
+  font-size: 21px;
+  line-height: 1.5; /* Back to 1.5, expecting 31.5px */
+  color: #222222;
+  flex: 1;
+  white-space: pre-wrap;
+  word-break: break-all;
+  display: block;
+
+  /* --- RE-REVISED: Alternating background with linear-gradient (31.5px) --- */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #f8f8f8, /* Off-white stripe */
+    #f8f8f8 31.5px, /* Ends at 31.5px (one line) */
+    #eeffee 31.5px, /* Light green stripe starts here */
+    #eeffee 63px /* Ends at 63px (two lines total) */
+  );
+  background-size: 100% 63px; /* Height of two stripes (31.5px * 2) */
+  background-repeat: repeat-y;
+  background-attachment: local;
+  background-position-y: 0; /* Start with 0 and use dev tools to fine-tune */
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 16px;
+}
+
+/* Syntax token colors - Dot Matrix Style */
+.ds-keyword {
+  color: #a00000;
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #006600;
+  font-style: normal;
+}
+
+.ds-comment {
+  color: #888888;
+  font-style: normal;
+}
+
+.ds-function {
+  color: #800080;
+}
+
+.ds-builtin {
+  color: #000080;
+}
+
+.ds-number {
+  color: #000080;
+}
+
+.ds-boolean {
+  color: #008800;
+}
+
+.ds-decorator {
+  color: #800080;
+}
+
+.ds-class {
+  color: #800080;
+}
+
+.ds-variable {
+  color: #008080;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(251, 247, 25, 0.7);
+}

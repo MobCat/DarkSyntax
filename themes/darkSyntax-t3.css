@@ -1,0 +1,169 @@
+/* darkSyntax-t3.css - T3 Chat Inspired Theme */
+
+/* General Wrapper and Background */
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 6px; /* Slightly more rounded corners */
+  background: #1a1b26; /* Deep dark blue/purple similar to T3 Chat's background */
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Titlebar */
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px; /* Increased padding */
+  background: #501832; /* Slightly lighter shade for the titlebar */
+  border-bottom: 1px solid #3e1327; /* Muted border color */
+  font-size: 14px; /* Slightly larger font */
+  color: #5d6682; /* Muted light blue/gray for text */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #5d6682; /* Soft blue for the file name/language */
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace; /* Modern monospace font */
+  font-size: 14px;
+  background: none;
+  padding: 0;
+  font-weight: 500; /* Slightly bolder */
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 10px; /* Increased gap */
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #a9b1d6; /* Muted light blue/gray for icons */
+  cursor: pointer;
+  padding: 6px; /* Increased padding */
+  border-radius: 4px; /* Slightly more rounded buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 16px; /* Assuming icon font or SVG, adjust if needed */
+}
+
+.ds-btn:hover {
+  background: rgba(118, 126, 176, 0.15); /* Subtle hover background */
+  color: #c0caf5; /* Lighter color on hover */
+}
+
+.ds-btn.ds-success {
+  color: #73daca; /* Soft green for success/copy button */
+}
+
+/* Content Area */
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Line Numbers */
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 12px 16px 16px;
+  text-align: right;
+  color: #5d6682; /* Muted gray/blue for line numbers */
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 14px; /* Slightly smaller than code text for distinction */
+  line-height: 1.5;
+  background: #501832; /* Matches titlebar background */
+  border-right: 1px solid #3e1327; /* Matches titlebar border */
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+/* Code Block */
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c0caf5; /* General text color for code */
+  background: #1b161f; /* Matches wrapper background */
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 12px;
+}
+
+/* Syntax token colors - T3 Chat Inspired */
+/* These are subjective and based on a general interpretation of T3 Chat's highlights */
+.ds-keyword {
+  color: #bb9af7; /* Soft purple for keywords */
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #9ece6a; /* Muted green for strings */
+}
+
+.ds-comment {
+  color: #6a718c; /* Darker, more subdued gray for comments */
+  font-style: italic;
+}
+
+.ds-function {
+  color: #7aa2f7; /* Soft blue for function names */
+}
+
+.ds-builtin {
+  color: #7dcfff; /* Lighter blue for built-ins */
+  font-style: italic;
+}
+
+.ds-number {
+  color: #ff9e64; /* Orange for numbers */
+}
+
+.ds-boolean {
+  color: #ff9e64; /* Orange for booleans */
+}
+
+.ds-decorator {
+  color: #bb9af7; /* Matches keyword purple */
+}
+
+.ds-class {
+  color: #7aa2f7;
+}
+
+.ds-variable {
+  color: #bb9af7;
+}
+
+/* For generic elements that might be highlighted (e.g., selection within other text) */
+.ds-highlighted {
+  white-space: pre;
+}
+
+/* Selection Styling (inherited from previous fix, adjust color if needed) */
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(163, 0, 76, 0.7);
+}

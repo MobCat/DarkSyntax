@@ -1,0 +1,163 @@
+/* darkSyntax-visualstudio.css - VS Dark+ theme */
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 4px;
+  background: #1e1e1e;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #252526;
+  border-bottom: 1px solid #333333;
+  font-size: 13px;
+  color: #858585;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #4ec9b0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  background: none;
+  padding: 0;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #858585;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ds-btn:hover {
+  background: #2d2d30;
+  color: #cccccc;
+}
+
+.ds-btn.ds-success {
+  color: #4ec9b0;
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 12px 16px 16px;
+  text-align: right;
+  color: #858585;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #1e1e1e;
+  border-right: 1px solid #333333;
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d4d4d4;
+  background: #1e1e1e;
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 12px;
+}
+
+/* Syntax token colors - VS Code Dark+ */
+.ds-keyword {
+  color: #569cd6;
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #ce9178;
+}
+
+.ds-comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.ds-function {
+  color: #dcdcaa;
+}
+
+.ds-builtin {
+  color: #4ec9b0;
+}
+
+.ds-number {
+  color: #b5cea8;
+}
+
+.ds-boolean {
+  color: #ff704d;
+}
+
+.ds-decorator {
+  color: #c586c0;
+}
+
+.ds-class {
+  color: #4ec9b0;
+}
+
+.ds-variable {
+  color: #9cdcfe;
+}
+
+.ds-operator {
+  color: #839496;
+  font-weight: normal;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(38, 79, 120, 0.7);
+}

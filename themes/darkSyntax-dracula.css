@@ -1,0 +1,162 @@
+/* darkSyntax-dracula.css - Dracula theme */
+
+/* General Wrapper and Background */
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 4px;
+  background: #282a36;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Titlebar */
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #21222c;
+  border-bottom: 1px solid #191a21;
+  font-size: 13px;
+  color: #6272a4;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #50fa7b;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  background: none;
+  padding: 0;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #6272a4;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ds-btn:hover {
+  background: #44475a;
+  color: #f8f8f2;
+}
+
+.ds-btn.ds-success {
+  color: #50fa7b;
+}
+/* Content Area */
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Line Numbers */
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 12px 16px 16px;
+  text-align: right;
+  color: #6272a4;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #21222c;
+  border-right: 1px solid #191a21;
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+/* Code Block */
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #f8f8f2;
+  background: #282a36;
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 12px;
+}
+
+/* Syntax token colors - Dracula */
+.ds-keyword {
+  color: #ff79c6;
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #f1fa8c;
+}
+
+.ds-comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+.ds-function {
+  color: #50fa7b;
+}
+
+.ds-builtin {
+  color: #8be9fd;
+}
+
+.ds-number {
+  color: #bd93f9;
+}
+
+.ds-boolean {
+  color: #bd93f9;
+}
+
+.ds-decorator {
+  color: #ff79c6;
+}
+
+.ds-class {
+  color: #50fa7b;
+}
+
+.ds-variable {
+  color: #f1fa8c;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(99, 99, 149, 0.7);
+}

@@ -1,0 +1,321 @@
+/* darkSyntax/themes/darkSyntax-sublime4.css - Sublime Text 4 Monokai (Build 4183) */
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 6px;
+  background: #303841;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #21262c;
+  border-bottom: 1px solid #403e41;
+  font-size: 13px;
+  color: #a6acb9;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s ease;
+}
+
+.ds-titlebar.ds-scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ds-title-left code {
+  color: #a6acb9;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  background: none;
+  padding: 0;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 10px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #727072;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ds-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fcfcfa;
+}
+
+.ds-btn:active {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(0.97);
+}
+
+.ds-btn.ds-success {
+  color: #a9dc76;
+}
+
+.ds-btn.ds-success:hover {
+  background: rgba(169, 220, 118, 0.12);
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Modern scrollbar styling */
+.ds-content::-webkit-scrollbar {
+  height: 14px;
+}
+
+.ds-content::-webkit-scrollbar-track {
+  background: #21262c;
+}
+
+.ds-content::-webkit-scrollbar-thumb {
+  background: #403e41;
+  border-radius: 7px;
+  border: 3px solid #21262c;
+}
+
+.ds-content::-webkit-scrollbar-thumb:hover {
+  background: #5b595c;
+}
+
+.ds-content::-webkit-scrollbar-thumb:active {
+  background: #6d6b6e;
+}
+
+.ds-line-numbers {
+  user-select: none;
+  padding: 18px 14px 18px 18px;
+  text-align: right;
+  color: #5b595c;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  background: #21262c;
+  border-right: 1px solid #403e41;
+  min-width: 45px;
+  flex-shrink: 0;
+}
+
+.ds-line-numbers span {
+  display: block;
+  padding: 0 10px;
+  transition: color 0.15s ease;
+  border-radius: 3px;
+}
+
+.ds-line-numbers span:hover {
+  color: #939293;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+pre[code] {
+  margin: 0;
+  padding: 18px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Menlo', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #fcfcfa;
+  background: #303841;
+  flex: 1;
+  height: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 14px;
+}
+
+/* Syntax token colors - Sublime Text 4 Monokai (Build 4183) */
+.ds-keyword {
+  color: #c695c6; /* ST4 pink for keywords (fn, let, const) */
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ds-string {
+  color: #90c794; /* ST4 green for strings */
+}
+
+.ds-comment {
+  color: #a6acb9; /* ST4 gray-green for comments */
+  font-weight: 400;
+}
+
+.ds-class {
+  color: #6699CC; /* ST4 cyan for class/type names */
+  font-weight: 400;
+}
+
+.ds-function {
+  color: #60B4B4; /* ST4 teal for function names (main, add, greet) */
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ds-builtin {
+  color: #628fb4; /* ST4 pink for macros (println!, vec!, format!) */
+  font-style: italic;
+  font-weight: 400;
+}
+
+.ds-number {
+  color: #F9AE57; /* ST4 orange for numbers */
+}
+
+.ds-boolean {
+  color: #EC6066; /* ST4 ref for booleans */
+  font-style: italic;
+}
+
+.ds-decorator {
+  color: #EC6066; /* ST4 orange for decorators/mut/operators */
+  font-weight: 400;
+}
+
+.ds-operator {
+  color: #f27754; /* ST4 orange for operators */
+  font-weight: 400;
+}
+
+.ds-variable {
+  color: #fcfcfa; /* ST4 default text color for variables */
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+  tab-size: 4;
+}
+
+/* Selection colors - ST4 style */
+.ds-wrapper ::selection, 
+.ds-wrapper ::-moz-selection {
+  background: rgba(76, 88, 99, 0.7);
+}
+
+
+/* Focus styles for accessibility */
+.ds-btn:focus-visible {
+  outline: 2px solid #78dce8;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .ds-btn,
+  .ds-titlebar,
+  .ds-line-numbers span {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ds-wrapper {
+    border: 2px solid #fcfcfa;
+  }
+  
+  .ds-titlebar {
+    border-bottom-width: 2px;
+  }
+  
+  .ds-line-numbers {
+    border-right-width: 2px;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .ds-wrapper {
+    border-radius: 4px;
+  }
+  
+  .ds-titlebar {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .ds-line-numbers {
+    padding: 14px 10px 14px 14px;
+    font-size: 13px;
+    min-width: 38px;
+  }
+  
+  pre[code] {
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* Print styles */
+@media print {
+  .ds-wrapper {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: white;
+  }
+  
+  .ds-titlebar {
+    background: #f8f8f8;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .ds-title-left code {
+    color: #2d8659;
+  }
+  
+  .ds-btn {
+    display: none;
+  }
+  
+  pre[code] {
+    background: white;
+    color: #1a1a1a;
+  }
+  
+  .ds-line-numbers {
+    background: #f8f8f8;
+    color: #666;
+    border-right: 1px solid #ddd;
+  }
+  
+}

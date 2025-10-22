@@ -1,0 +1,178 @@
+/* hotdog.css - Windows 3.1 Hotdog Stand Theme */
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 0; /* No rounded corners, very Win 3.1 */
+  background: #ffff00; /* Bright yellow background */
+  border: 2px solid #000000; /* Thick black border */
+  box-shadow: 2px 2px 0 #808080; /* Simple "inset" shadow for the wrapper */
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px; /* Slightly less padding, more compact */
+  background: #ff0000; /* Red title bar */
+  border-bottom: 2px solid #000000; /* Black border below title bar */
+  font-family: 'System', 'Segoe UI', 'Arial', sans-serif; /* System-like font */
+  font-size: 14px;
+  color: #ffff00; /* Yellow text on red */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: none; /* No transitions for a retro feel */
+  text-transform: uppercase; /* Common in old UIs */
+  font-weight: bold;
+}
+
+.ds-title-left code {
+  color: #000000; /* Black for the filename/language */
+  font-family: 'System', 'Segoe UI', 'Arial', sans-serif;
+  font-size: 14px;
+  background: none;
+  padding: 0;
+  font-weight: bold;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 4px; /* Smaller gap */
+}
+
+.ds-btn {
+  background: #808080; /* Gray button background */
+  border: 1px solid #000000; /* Black button border */
+  color: #ffff00; /* Yellow button text */
+  cursor: pointer;
+  padding: 2px 6px; /* Smaller button padding */
+  border-radius: 0; /* No rounded corners */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+  font-family: 'System', 'Segoe UI', 'Arial', sans-serif;
+  font-size: 11px; /* Smaller font for buttons */
+  text-transform: uppercase;
+  box-shadow: 1px 1px 0 #000000; /* Simple button shadow */
+}
+
+.ds-btn:hover {
+  background: #000000; /* Black on hover */
+  color: #ff0000; /* Red text on hover */
+}
+
+.ds-btn.ds-success {
+  color: #008000; /* Darker green for success */
+  border-color: #000000;
+  background: #808080;
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  background: #ffff00; /* Main content area is yellow */
+}
+
+.ds-line-numbers {
+  user-select: none;
+  padding: 8px 10px 8px 12px; /* Adjusted padding to match code block */
+  text-align: right;
+  color: #000000; /* Black line numbers */
+  font-family: 'Consolas', 'Lucida Console', monospace; /* Classic monospace */
+  font-size: 13px;
+  line-height: 1.5; /* Standard line height */
+  background: #ff0000; /* Red background for line numbers */
+  border-right: 2px solid #000000; /* Black separator */
+  min-width: 30px; /* Make it a bit more compact */
+}
+
+.ds-line-numbers span {
+  display: block;
+  background: #ff0000; /* Ensure span background matches parent */
+  line-height: inherit;
+}
+
+pre[code] {
+  margin: 0;
+  padding: 8px 12px; /* Padding for the code content */
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Consolas', 'Lucida Console', monospace; /* Classic monospace */
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000000; /* Black text for code */
+  background: #ffff00; /* Yellow background for code */
+  flex: 1;
+  white-space: pre-wrap; /* Allow long lines to wrap */
+  word-break: break-all;
+  display: block;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 10px; /* Adjust if line numbers are present */
+}
+
+/* Syntax token colors - Hotdog Stand Style */
+.ds-keyword {
+  color: #ff0000; /* Red keywords */
+  font-weight: bold; /* Bold keywords */
+}
+
+.ds-string {
+  color: #008000; /* Dark green strings */
+  font-style: normal;
+}
+
+.ds-comment {
+  color: #800000; /* Maroon comments */
+  font-style: italic;
+}
+
+.ds-function {
+  color: #800080; /* Purple functions */
+}
+
+.ds-builtin {
+  color: #0000ff; /* Blue builtins */
+}
+
+.ds-number {
+  color: #a52a2a; /* Brown numbers (Hotdog Stand used brown for some things) */
+}
+
+.ds-boolean {
+  color: #a52a2a; /* Brown booleans */
+}
+
+.ds-decorator {
+  color: #800080; /* Purple decorators */
+}
+
+.ds-class {
+  color: #800080;
+}
+
+.ds-variable {
+  color: #008080;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+/* Hotdog Stand selection */
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(255, 0, 0, 0.7);
+}

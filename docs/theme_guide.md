@@ -66,13 +66,14 @@ These **must** be defined for syntax highlighting to work:
 .ds-builtin      /* Built-in types/functions */
 .ds-number       /* Numeric literals */
 .ds-boolean      /* Boolean/null values */
-.ds-decorator    /* Annotations/pragmas */
+.ds-decorator    /* Annotations/attributes/modifiers */
+.ds-operator     /* Mathematical and logical operators */
 .ds-variable     /* Variables/field references */
 ```
 
 **Missing any of these will trigger a warning** in the browser console:
 ```
-DarkSyntax: Missing CSS classes in theme: ds-variable
+DarkSyntax: Missing CSS classes in theme: ds-operator
 ```
 
 ---
@@ -82,13 +83,14 @@ DarkSyntax: Missing CSS classes in theme: ds-variable
 Here's what each class is used for across different languages:
 
 ### ds-keyword
-**Control flow, declarations, operators**
+**Control flow, declarations, reserved words**
 
 Examples:
 - `if`, `else`, `for`, `while`, `return` (most languages)
 - `class`, `function`, `var`, `let`, `const` (JavaScript)
 - `def`, `import`, `from` (Python)
 - `public`, `private`, `static` (Java, C++)
+- `fn`, `struct`, `enum` (Rust)
 - `BEGIN`, `END` (AWK)
 
 **Color suggestions:**
@@ -135,6 +137,7 @@ Examples:
 - `Person` in `Person user = new Person()` (Java, C#)
 - `List<String>` (generics)
 - Type annotations in TypeScript/Python
+- `i32`, `u64`, `String` (Rust types)
 
 **Color suggestions:**
 - Bright, important color (types are significant)
@@ -150,28 +153,30 @@ Examples:
 - `object.method()` (method calls)
 - `function myFunc()` (definitions)
 - `def my_func():` (Python)
+- `fn add(a: i32)` (Rust)
 
 **Color suggestions:**
 - Distinct but not overpowering
-- Lighter green, yellow-green, or yellow
+- Lighter green, yellow-green, cyan, or yellow
 - Related to class color but distinguishable
-- Examples: `#a6da95` (light green), `#dcdcaa` (VS Code yellow)
+- Examples: `#a6da95` (light green), `#dcdcaa` (VS Code yellow), `#4b96a7` (ST4 teal)
 
 ### ds-builtin
-**Built-in types, standard library functions**
+**Built-in types, standard library functions, macros**
 
 Examples:
 - `print`, `len`, `range` (Python)
 - `console`, `document` (JavaScript)
 - `std::vector`, `std::string` (C++)
 - `Integer`, `String` (Java)
+- `println!`, `vec!`, `format!` (Rust macros)
 - `NR`, `NF`, `FS` (AWK built-in variables)
 
 **Color suggestions:**
 - Distinct from user functions
 - Cyan, blue, or purple
 - Often italic to emphasize they're built-in
-- Examples: `#66d9ef` (Monokai cyan), `#4ec9b0` (VS Code cyan)
+- Examples: `#66d9ef` (Monokai cyan), `#4ec9b0` (VS Code cyan), `#628fb4` (ST4 blue)
 
 ### ds-number
 **Numeric literals**
@@ -181,6 +186,7 @@ Examples:
 - `0xFF`, `0x1A2B` (hexadecimal)
 - `0b1010` (binary)
 - `1.23e-4` (scientific notation)
+- `100_000` (with underscores)
 
 **Color suggestions:**
 - Distinct color, often purple or orange
@@ -194,27 +200,48 @@ Examples:
 - `true`, `false` (most languages)
 - `True`, `False` (Python)
 - `null`, `nullptr` (C/C++)
-- `NULL`, `nil`
+- `NULL`, `nil`, `None`
 
 **Color suggestions:**
 - Often same as keywords or numbers
 - Orange, blue, or purple
-- Examples: `#fd971f` (Monokai orange), `#569cd6` (VS Code blue)
+- Examples: `#fd971f` (Monokai orange), `#569cd6` (VS Code blue), `#ae81ff` (purple)
 
 ### ds-decorator
-**Annotations, attributes, preprocessor directives**
+**Annotations, attributes, modifiers, preprocessor directives**
 
 Examples:
-- `@decorator` (Python, Java)
-- `#include`, `#define` (C/C++)
+- `@decorator` (Python)
+- `@Override`, `@Entity` (Java)
+- `#[derive(Debug)]` (Rust attributes)
+- `#include`, `#define` (C/C++ preprocessor)
 - `[Attribute]` (C#)
+- `mut`, `pub`, `unsafe` (Rust modifiers)
 - `pragma` (Ada)
 - Shebangs: `#!/bin/bash`
 
 **Color suggestions:**
-- Often matches keywords
-- Pink, magenta, or purple
-- Examples: `#f92672` (Monokai pink), `#c586c0` (VS Code purple)
+- Often matches keywords or stands out
+- Pink, magenta, orange, or purple
+- Examples: `#f92672` (Monokai pink), `#c586c0` (VS Code purple), `#f27754` (ST4 orange)
+
+### ds-operator
+**Mathematical and logical operators**
+
+Examples:
+- Math: `+`, `-`, `*`, `/`, `%`
+- Assignment: `=`, `+=`, `-=`, `*=`, `/=`
+- Comparison: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Logical: `&&`, `||`, `!`, `&`, `|`, `^`
+- Other: `->`, `::`, `.`, `?:`, `??`
+
+**Color suggestions:**
+- Distinct from keywords
+- Orange, red, or bright color
+- Should be readable but not overpowering
+- Examples: `#f27754` (ST4 orange), `#d4d4d4` (VS Code default), `#f92672` (Monokai pink)
+
+**Note:** Older languages (C, Pascal, BASIC) may not use this class extensively, as operators were often left unstyled. Modern languages (Rust, TypeScript, Swift) benefit from operator highlighting.
 
 ### ds-variable
 **Variables, parameters, field references**
@@ -224,12 +251,13 @@ Examples:
 - `$variable` (Bash, PHP)
 - `@parameter` (Ruby)
 - `this`, `self` (special variables)
+- Variable names in declarations
 
 **Color suggestions:**
 - Distinct from functions and builtins
-- Light cyan, light blue, or white
+- Light cyan, light blue, or white/default text color
 - Should be readable but not dominant
-- Examples: `#a1efe4` (light cyan), `#9cdcfe` (VS Code light blue)
+- Examples: `#a1efe4` (light cyan), `#9cdcfe` (VS Code light blue), `#fcfcfa` (default/white)
 
 ---
 
@@ -248,6 +276,7 @@ Examples:
 - Keywords
 - Classes
 - Decorators
+- Operators
 
 **Group 2 - Medium Priority (Vivid)**
 - Functions
@@ -285,6 +314,7 @@ string: #e6db74;     /* yellow */
 comment: #75715e;    /* gray */
 function: #a6e22e;   /* green */
 builtin: #66d9ef;    /* cyan */
+operator: #f92672;   /* pink */
 ```
 
 **VS Code-style (dark, cool)**
@@ -296,6 +326,7 @@ string: #ce9178;     /* orange */
 comment: #6a9955;    /* green */
 function: #dcdcaa;   /* yellow */
 builtin: #4ec9b0;    /* teal */
+operator: #d4d4d4;   /* default */
 ```
 
 **GitHub-style (dark)**
@@ -307,6 +338,19 @@ string: #a5d6ff;     /* blue */
 comment: #8b949e;    /* gray */
 function: #d2a8ff;   /* purple */
 builtin: #79c0ff;    /* cyan */
+operator: #ff7b72;   /* red */
+```
+
+**Sublime Text 4 (dark)**
+```css
+background: #303841;
+text: #fcfcfa;
+keyword: #fb6a9f;    /* pink */
+string: #e6db74;     /* yellow */
+comment: #75715e;    /* gray */
+function: #4b96a7;   /* teal */
+builtin: #628fb4;    /* blue */
+operator: #f27754;   /* orange */
 ```
 
 ---
@@ -329,8 +373,9 @@ builtin: #79c0ff;    /* cyan */
   <pre code="javascript">
 // Comment test
 const keyword = "string";
+let x = 42;
+x += 5;
 function myFunction() {
-  let number = 42;
   return true;
 }
 class MyClass {
@@ -354,12 +399,15 @@ Make sure you can see distinct colors for:
 - Numbers (`42`)
 - Booleans (`true`)
 - Classes (`MyClass`)
+- Operators (`=`, `+=`)
+- Variables (`x`)
 
 ### 3. Test in Different Languages
 
 Try your theme with different language configs:
 - Python (whitespace-sensitive)
 - C++ (preprocessor directives)
+- Rust (operators, lifetimes, macros)
 - AWK (field references with $)
 - Bash (dollar variables)
 
@@ -367,7 +415,7 @@ Try your theme with different language configs:
 
 Look for warnings:
 ```
-DarkSyntax: Missing CSS classes in theme: ds-variable
+DarkSyntax: Missing CSS classes in theme: ds-operator
 ```
 
 This means you forgot to define a required class.
@@ -409,6 +457,7 @@ pre[code] {
 .ds-number { color: #b5cea8; }
 .ds-boolean { color: #569cd6; }
 .ds-decorator { color: #c586c0; }
+.ds-operator { color: #d4d4d4; }
 .ds-variable { color: #9cdcfe; }
 ```
 
@@ -447,6 +496,7 @@ pre[code] {
 .ds-number { color: #005cc5; }
 .ds-boolean { color: #005cc5; }
 .ds-decorator { color: #e36209; }
+.ds-operator { color: #d73a49; }
 .ds-variable { color: #24292e; }
 ```
 
@@ -461,11 +511,13 @@ pre[code] {
   --ds-bg: #1e1e1e;
   --ds-keyword: #569cd6;
   --ds-string: #ce9178;
+  --ds-operator: #d4d4d4;
   /* ... more variables */
 }
 
 .ds-keyword { color: var(--ds-keyword); }
 .ds-string { color: var(--ds-string); }
+.ds-operator { color: var(--ds-operator); }
 ```
 
 This makes it easier to create theme variants.
@@ -507,9 +559,10 @@ pre[code] .ds-function:hover {
 2. **Test with real code**: Syntax highlighting looks different with actual code
 3. **Check contrast ratios**: Use tools like WebAIM's contrast checker
 4. **Be consistent**: Similar tokens should use similar colors
-5. **Don't use too many colors**: 6-8 distinct colors is plenty
+5. **Don't use too many colors**: 7-9 distinct colors is plenty
 6. **Test in different lighting**: What looks good at night might not work in daylight
 7. **Consider your users**: Accessibility matters
+8. **Operators matter for modern languages**: Rust, TypeScript, Swift benefit from operator highlighting
 
 ---
 
@@ -522,7 +575,7 @@ pre[code] .ds-function:hover {
 
 ### Missing Highlighting
 - Check browser console for missing class warnings
-- Ensure all 10 required classes are defined
+- Ensure all 11 required classes are defined
 - Verify CSS file is loading (Network tab)
 
 ### Classes Not Working
@@ -530,7 +583,11 @@ pre[code] .ds-function:hover {
 - Check for typos in class names
 - Ensure CSS file loads after darkSyntax.js
 
+### Operators Not Showing
+- Verify `.ds-operator` class is defined in your theme
+- Check that the language config uses the operator class
+- Modern languages (Rust, TypeScript) use operators more than older languages (C, Pascal)
+
 ---
 
-*Last updated: 2025*
-*DarkSyntax Version: 1.0*
+*Last updated: 20251010*

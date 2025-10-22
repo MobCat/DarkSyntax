@@ -1,0 +1,160 @@
+/* darkSyntax-github.css - GitHub dark theme */
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 6px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  font-size: 13px;
+  color: #8b949e;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #58a6ff;
+  font-family: ui-monospace, 'SFMono-Regular', 'Consolas', 'Monaco', 'Liberation Mono', monospace;
+  font-size: 13px;
+  background: none;
+  padding: 0;
+  font-weight: 600;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #8b949e;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ds-btn:hover {
+  background: #30363d;
+  color: #c9d1d9;
+}
+
+.ds-btn.ds-success {
+  color: #3fb950;
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 12px 16px 16px;
+  text-align: right;
+  color: #6e7681;
+  font-family: ui-monospace, 'SFMono-Regular', 'Consolas', 'Monaco', 'Liberation Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  background: #161b22;
+  border-right: 1px solid #30363d;
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: ui-monospace, 'SFMono-Regular', 'Consolas', 'Monaco', 'Liberation Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #c9d1d9;
+  background: #0d1117;
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 12px;
+}
+
+/* Syntax token colors - GitHub dark */
+.ds-keyword {
+  color: #ff7b72;
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #a5d6ff;
+}
+
+.ds-comment {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.ds-function {
+  color: #d2a8ff;
+}
+
+.ds-builtin {
+  color: #79c0ff;
+}
+
+.ds-number {
+  color: #79c0ff;
+}
+
+.ds-boolean {
+  color: #79c0ff;
+}
+
+.ds-decorator {
+  color: #d2a8ff;
+}
+
+.ds-class {
+  color: #7ee787;
+}
+
+.ds-variable {
+  color: #ffa657;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(58, 64, 71, 0.7);
+}

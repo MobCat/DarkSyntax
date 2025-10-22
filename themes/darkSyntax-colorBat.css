@@ -1,0 +1,170 @@
+/* darkSyntax-colorBat.css - TRUE High Contrast & Color Blind Friendly Theme - Refined */
+
+/* General Wrapper and Background */
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 4px;
+  background: #000000; /* Pure black for maximum contrast */
+  border: 1px solid #1a1a1a; /* Very dark border */
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Titlebar */
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #1a1a1a; /* Very dark grey */
+  border-bottom: 1px solid #333333; /* Darker grey border */
+  font-size: 13px;
+  color: #ffffff; /* Pure white for high contrast */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #ffff00; /* Bright yellow for distinction */
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  background: none;
+  padding: 0;
+  font-weight: 500;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff; /* Pure white */
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ds-btn:hover {
+  background: #333333; /* Dark grey on hover */
+  color: #ffff00; /* Bright yellow on hover */
+}
+
+.ds-btn.ds-success {
+  color: #39ff14; /* Neon green, highly distinct and high contrast */
+}
+
+/* Content Area */
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Line Numbers */
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 12px 16px 16px;
+  text-align: right;
+  color: #aaaaaa; /* Light grey for readability, still high contrast */
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #1a1a1a; /* Matches titlebar background */
+  border-right: 1px solid #333333; /* Stronger border */
+  min-width: 40px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+/* Code Block */
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff; /* Pure white for main code text */
+  background: #000000; /* Pure black */
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 12px;
+}
+
+/* Syntax token colors - TRUE High Contrast & Color Blind Friendly */
+
+/* Example: `const script = document.createElement('script');` */
+
+.ds-keyword {
+  color: #ff00ff; /* Bright magenta (for `const`, `let`, `var`, `function`) */
+  font-weight: bold; /* Added emphasis */
+}
+
+.ds-string {
+  color: #ffff00; /* Bright yellow (for `'script'`) */
+}
+
+.ds-comment {
+  color: #ff8000; /* Bright cyan (for comments) */
+  font-style: italic;
+  background: #444;
+}
+
+.ds-function {
+  color: #00ff00; /* Bright, vivid blue (for `createElement`) - distinct from yellow and magenta */
+}
+
+.ds-builtin {
+  color: #00ffff; /* Light green, very distinct (for `document`) */
+}
+
+.ds-number {
+  color: #ff0066; /* Hot pink (distinct from other colors) */
+}
+
+.ds-boolean {
+  color: #ff0000; /* Pure Red as requested (use with caution for accessibility) */
+  font-weight: bold; /* Added emphasis for pure red */
+}
+
+.ds-decorator {
+  color: #ff00ff; /* Bright magenta, matches keyword */
+}
+
+.ds-class {
+  color: #ff00ff;
+}
+
+.ds-variable {
+  color: #33cccc;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(0, 255, 255, 0.4); /* Bright cyan selection, high contrast */
+}

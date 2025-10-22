@@ -1,0 +1,162 @@
+/* darkSyntax-claude.css - Claude theme with warm, thoughtful colors */
+/* I misworded the prompt and ask claude to make a theme for its self, not of its self */
+/* So this is more what claude thinks claude code should look like, not what it actually looks like */
+
+.ds-wrapper {
+  position: relative;
+  margin: 1em 0;
+  border-radius: 8px;
+  background: #1a1511;
+  border: 1px solid #2d2419;
+}
+
+.ds-sentinel {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ds-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #231d17;
+  border-bottom: 1px solid #3d342a;
+  font-size: 13px;
+  color: #9b8b7e;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: box-shadow 0.2s;
+}
+
+.ds-title-left code {
+  color: #cc9b6d;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+  background: none;
+  padding: 0;
+  font-weight: 500;
+}
+
+.ds-title-right {
+  display: flex;
+  gap: 8px;
+}
+
+.ds-btn {
+  background: transparent;
+  border: none;
+  color: #9b8b7e;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.ds-btn:hover {
+  background: #2d2419;
+  color: #d4c5b9;
+}
+
+.ds-btn.ds-success {
+  color: #8ba888;
+}
+
+.ds-content {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+}
+
+.ds-line-numbers {
+  user-select: none;
+  padding: 16px 14px 16px 16px;
+  text-align: right;
+  color: #6b5d52;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #231d17;
+  border-right: 1px solid #3d342a;
+  min-width: 45px;
+}
+
+.ds-line-numbers span {
+  display: block;
+}
+
+pre[code] {
+  margin: 0;
+  padding: 16px;
+  border-radius: 0;
+  overflow-x: visible;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #d4c5b9;
+  background: #1a1511;
+  flex: 1;
+}
+
+pre[code].ds-has-line-numbers {
+  padding-left: 14px;
+}
+
+/* Syntax token colors - Claude inspired warm palette */
+.ds-keyword {
+  color: #cc9b6d;
+  font-weight: normal;
+}
+
+.ds-string {
+  color: #8ba888;
+}
+
+.ds-comment {
+  color: #7a6d63;
+  font-style: italic;
+}
+
+.ds-function {
+  color: #b4a4d4;
+}
+
+.ds-builtin {
+  color: #86b3c7;
+}
+
+.ds-number {
+  color: #d4a88c;
+}
+
+.ds-boolean {
+  color: #cc9b6d;
+}
+
+.ds-decorator {
+  color: #c49a7b;
+}
+
+.ds-class {
+  color: #d4a88c;
+}
+
+.ds-variable {
+  color: #a8c7a0;
+}
+
+pre.ds-highlighted {
+  white-space: pre;
+}
+
+.ds-wrapper ::selection,
+.ds-wrapper ::-moz-selection {
+  background: rgba(58, 64, 71, 0.7);
+}

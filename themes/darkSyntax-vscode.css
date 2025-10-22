@@ -1,0 +1,27 @@
+/* darkSyntax-vscode.css - VS Code Dark+ clone */
+
+.ds-wrapper {
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+pre[code] {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Syntax token colors – VS Code Dark+ accurate */
+.ds-keyword  { color: #569cd6; } /* blue */
+.ds-string   { color: #ce9178; } /* orange */
+.ds-comment  { color: #6a9955; font-style: italic; } /* green */
+.ds-function { color: #dcdcaa; } /* yellow */
+.ds-class    { color: #4ec9b0; } /* teal */
+.ds-builtin  { color: #4ec9b0; font-style: italic; } /* teal italic */
+.ds-number   { color: #b5cea8; } /* light green */
+.ds-boolean  { color: #569cd6; } /* blue */
+.ds-decorator{ color: #c586c0; } /* purple */
+.ds-variable { color: #9cdcfe; } /* light blue */
+.ds-operator { color: #d4d4d4; } /* default text color – VS Code doesn't tint operators */

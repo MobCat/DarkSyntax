@@ -26,7 +26,7 @@ Complete guide to building language syntax highlighting configurations.
 
 ## File Structure
 
-Every config file has three parts:
+Every config file has four parts:
 
 ### 1. Language Documentation (Comments)
 ```javascript
@@ -40,28 +40,53 @@ Every config file has three parts:
 // ALIASES: ['python', 'py', 'pyw']
 // File extensions: .py, .pyw
 //
+// [File extension explanation of what which file type is used for] 
+//
 // [Historical info, features, quirks, etc.]
 ```
 
-### 2. Demo Code (Commented Out)
+### 2. Notes on Syntax
 ```javascript
-/* DEMO CODE - Sample code for testing
-   ====================================
+// NOTES ON PYTHON SYNTAX
+// ----------------------
+// - Comments use # character
+// - Indentation is significant (4 spaces preferred)
+// - Supports '', "", ''' triple quotes
+// - Decorators use @ symbol
+```
 
+### 3. Sample Code (Inside /* */ blocks)
+```javascript
+// SAMPLE CODE
+// -----------
+/*
 def hello():
     print("Hello, World!")
-
 */
 ```
 
-### 3. Language Registration
+### 4. Language Registration
 ```javascript
+// LANGUAGE SYNTAX CONFIGURATION FOR DARKSYNTAX
+// =============================================
 darkSyntax.registerLanguage('python', {
   rules: [
     // Your syntax rules here
   ]
 });
 ```
+
+### Optional: Disable Line Numbers
+```javascript
+darkSyntax.registerLanguage('python', {
+  showLineNumbers: false,
+  rules: [
+    // Your syntax rules here
+  ]
+});
+```
+Useful for languages like BASIC that have user defined line numbers.
+If your language does not need to hide line numbers, you don't even need to include showLineNumbers, its true by default.
 
 ---
 
@@ -108,7 +133,7 @@ captureGroup: 1  // Only highlights the function name
 
 ## Available CSS Classes
 
-DarkSyntax supports 10 standard syntax classes:
+DarkSyntax supports 11 standard syntax classes:
 
 | Class | Usage | Examples |
 |-------|-------|----------|
@@ -117,11 +142,18 @@ DarkSyntax supports 10 standard syntax classes:
 | `comment` | Code comments | `// comment`, `/* block */` |
 | `class` | Type/class names | `MyClass`, `String`, `List<T>` |
 | `function` | Function names | `myFunc()`, `obj.method()` |
-| `builtin` | Built-in types/functions | `print`, `int`, `std::vector` |
+| `builtin` | Built-in types/functions | `print`, `int`, `println!` |
 | `number` | Numeric literals | `42`, `3.14`, `0xFF` |
 | `boolean` | Boolean/null values | `true`, `false`, `null` |
-| `decorator` | Annotations/pragmas | `@decorator`, `#include` |
+| `decorator` | Annotations/modifiers | `@decorator`, `mut`, `#include` |
+| `operator` | Math/logic operators | `+`, `=`, `->`, `==`, `+=` |
 | `variable` | Variables/fields | `$var`, `@param`, `this` |
+
+**Important Notes:**
+- **You don't need to use all 11 classes** - Only use what makes sense for your language
+- **Simple languages** (like BASIC or AWK) might only need 6-7 classes
+- **Modern languages** (like Rust or TypeScript) benefit from all 11
+- **Classes are flexible** - If your language's modifiers look better as `boolean` instead of `decorator`, that's fine! But try to use the intended classes first for consistency across themes.
 
 ### Class Priority Guidelines
 
@@ -131,6 +163,7 @@ When multiple classes could apply to the same token:
 2. **Built-ins** and **functions** are similar priority
 3. **Variables** are usually lower priority
 4. **Decorators** match the thing they decorate
+5. **Operators** should be distinct from keywords
 
 ---
 
@@ -145,7 +178,8 @@ When multiple classes could apply to the same token:
 90-99    Strings (before keywords!)
 70-89    Decorators, preprocessors
 60-69    Class/type definitions
-50-59    Keywords
+55-59    Operators (modern languages)
+50-54    Keywords
 40-49    Built-in types/functions
 30-45    Function definitions and calls
 20-29    Numbers, booleans
@@ -232,6 +266,15 @@ rules: [
 {
   class: 'string',
   pattern: /'(?:[^'\\]|\\.)*'/g,
+  priority: 90
+}
+```
+
+**Prevent cross-line matching**:
+```javascript
+{
+  class: 'string',
+  pattern: /"(?:[^"\\\n]|\\.)*"/g,  // \n stops at newlines
   priority: 90
 }
 ```
@@ -334,6 +377,19 @@ rules: [
 }
 ```
 
+### Operators
+
+**Math and assignment operators** (Rust, C++, TypeScript):
+```javascript
+{
+  class: 'operator',
+  pattern: /[+\-*\/%=<>!&|^~?:]+/g,
+  priority: 58
+}
+```
+
+**Note:** Older languages (C, Pascal, BASIC) may not need operator highlighting. Modern languages (Rust, TypeScript, Swift) benefit from it.
+
 ### Variables
 
 **Field references** (AWK $1, $NF):
@@ -394,6 +450,7 @@ rules: [
     // Your test code here
     keyword test;
     "string test"
+    x = 5 + 3;
     function testFunc() {}
   </pre>
 </body>
@@ -409,8 +466,10 @@ Always test these scenarios:
 ✓ Keywords in comments: // if while - should be ONE comment color
 ✓ Numbers in strings: "42" - should be string, not number
 ✓ Strings with escapes: "say \"hello\"" - should handle \"
+✓ Strings across lines: Should NOT match across newlines
 ✓ Multi-line comments: /* line1\nline2 */ - both lines comment
 ✓ Function calls: myFunc() - "myFunc" should be function color
+✓ Operators: x = 5 + 3 - operators should be highlighted
 ✓ Nested syntax: "string /*not comment*/" - string wins
 ```
 
@@ -421,6 +480,7 @@ Inspect the HTML output:
 <pre code="python" class="ds-highlighted">
   <span class="ds-keyword">if</span>
   <span class="ds-string">"test"</span>
+  <span class="ds-operator">=</span>
 </pre>
 ```
 
@@ -476,9 +536,21 @@ pattern: /".*"/g  // "hello" and "world" becomes one match
 
 // CORRECT - Non-greedy, stops at first closing "
 pattern: /".*?"/g  // Matches "hello" and "world" separately
+
+// BETTER - Handle escapes properly
+pattern: /"(?:[^"\\]|\\.)*"/g  // Handles \" correctly
 ```
 
-### 5. Unescaped Special Characters
+### 5. Strings Crossing Lines
+```javascript
+// WRONG - String matches across multiple lines
+pattern: /'(?:[^'\\]|\\.)*'/g
+
+// CORRECT - Stop at newlines
+pattern: /'(?:[^'\\\n]|\\.)*'/g  // \n prevents cross-line
+```
+
+### 6. Unescaped Special Characters
 ```javascript
 // WRONG - + is a regex operator
 pattern: /a+b/g  // Matches "ab", "aaab", "aaaab"
@@ -489,7 +561,7 @@ pattern: /a\+b/g  // Matches literal "a+b"
 
 Special characters that need escaping: `. * + ? ^ $ { } ( ) | [ ] \`
 
-### 6. Not Handling Escape Sequences
+### 7. Not Handling Escape Sequences
 ```javascript
 // WRONG - Breaks on strings like "say \"hello\""
 pattern: /"[^"]*"/g  // Stops at \" thinking string ended
@@ -498,7 +570,7 @@ pattern: /"[^"]*"/g  // Stops at \" thinking string ended
 pattern: /"(?:[^"\\]|\\.)*"/g  // Allows \" inside string
 ```
 
-### 7. Wrong Capture Group
+### 8. Wrong Capture Group
 ```javascript
 // Pattern: /function\s+([a-zA-Z_]\w*)\s*\(/g
 // Groups:   0=whole match, 1=function name
@@ -527,29 +599,36 @@ Use this template for the header comments in your config file:
 // ALIASES: ['yourlang', 'yl', 'ylang']
 // File extensions: .yl, .ylang
 //
+// .yl default file
+// .ylang advanced config
+//
 // LANGUAGE SYNTAX NOTES
 // =====================
 //
 // HISTORICAL SIGNIFICANCE
 // -----------------------
-// [Who created it, when, where, why]
-// [Major versions and milestones]
-// [Impact on programming history]
+// - Major milestone 1 (Year)
+// - Major milestone 2 (Year)
+// - Impact on programming history
+// - Key evolution points with dates
 //
 // INFLUENCED
 // ----------
-// [Languages that borrowed from this one]
-// [Concepts that spread to other languages]
+// - Language/Tool 1 (Year) - Specific feature borrowed
+// - Language/Tool 2 (Year) - Specific concept adopted
+// - Language/Tool 3 (Year) - How it was influenced
 //
 // USED FOR
 // --------
-// [Main applications and domains]
-// [Industries and use cases]
+// - Main application domain 1
+// - Main application domain 2
+// - Specific industries or use cases
 //
 // KEY FEATURES
 // ------------
-// [Unique or notable features]
-// [What makes this language special]
+// - Unique feature 1
+// - Notable feature 2
+// - What makes this language special
 //
 // CORE SYNTAX
 // -----------
@@ -558,19 +637,35 @@ Use this template for the header comments in your config file:
 //
 // QUIRKS
 // ------
-// [Unusual behaviors]
-// [Common gotchas]
-// [Things that surprise new users]
+// - **Quirk category 1**: Description
+//   * Specific example
+//   * Another example
+// - **Quirk category 2**: Description
 //
-// LANGUAGE SYNTAX CONFIGURATION FOR DARKSYNTAX
-// =============================================
-
-/* DEMO CODE - Copy everything below into a test file
-   ===================================================
-
-[Your demo code here - should demonstrate ALL syntax classes]
-
+// FAMOUS QUOTES & SAYINGS
+// -----------------------
+// - "Quote about the language" - Attribution
+// - "Another relevant quote" - Attribution
+//
+// NOTES ON LANGUAGE SYNTAX
+// -------------------------
+// - Syntax note 1
+// - Syntax note 2
+// - Important language-specific details
+//
+// SAMPLE CODE
+// -----------
+/*
+[Your sample code here - demonstrates key language features]
 */
+//
+// More sample code if needed:
+/*
+[Additional code examples]
+*/
+//
+// LANGUAGE NAME SYNTAX CONFIGURATION FOR DARKSYNTAX
+// =================================================
 
 darkSyntax.registerLanguage('yourlang', {
   rules: [
@@ -578,6 +673,30 @@ darkSyntax.registerLanguage('yourlang', {
   ]
 });
 ```
+
+### Documentation Guidelines
+
+**HISTORICAL SIGNIFICANCE**
+- Include specific dates and milestones
+- Focus on factual evolution of the language
+- Mention key versions and what they introduced
+
+**INFLUENCED**
+- Be specific: list actual languages/tools with dates
+- Explain WHAT was borrowed, not just that influence happened
+- Example: "C (1972) - Inline assembly support (__asm keyword)"
+- NOT: "Many languages were influenced by this"
+
+**QUIRKS**
+- Use bold category headers: `**Category name**:`
+- Provide concrete examples with code or specifics
+- Group related quirks together
+
+**SAMPLE CODE**
+- Always wrap in `/* */` comment blocks for easy copy/paste
+- Include code that demonstrates ALL syntax classes you use
+- Show both basic and complex examples
+- Multiple code blocks are fine if needed
 
 ---
 
@@ -591,6 +710,12 @@ darkSyntax.registerLanguage('yourlang', {
 6. **Document thoroughly**: Future you will thank you
 7. **Test edge cases**: Try to break your highlighting
 8. **Check browser console**: Look for errors and warnings
+9. **Line numbers are optional**: You can hide line numbers for languages that have user-defined line numbers like BASIC or FLOW-MATIC
+10. **Sample code in /* */ blocks**: Makes code easy to extract from config files
+11. **Use only the classes you need**: Simple languages don't need all 11 classes
+12. **Be flexible with classes**: If a language feature looks better with a different class, use it! But try the intended class first for theme consistency
+13. **Operators for modern languages**: Rust, TypeScript, Swift benefit from operator highlighting; C, Pascal, BASIC typically don't need it
+14. **Prevent cross-line string matching**: Add `\n` to string patterns to stop at newlines
 
 ---
 
@@ -601,19 +726,22 @@ darkSyntax.registerLanguage('yourlang', {
 - Simple keywords and operators
 - Line numbers as special case
 - Case-insensitive
+- **Needs about 6-7 classes**: keyword, string, comment, number, boolean, builtin, variable
 
 ### Medium Language (Python)
 - Indentation-sensitive (but not for highlighting)
 - Decorators (@)
 - Multiple string types (', ", ''', """)
 - Built-in functions
+- **Needs about 8-9 classes**: keyword, string, comment, function, builtin, number, boolean, decorator, variable
 
-### Complex Language (C++)
-- Preprocessor directives (#include)
-- Templates with < >
-- Multiple inheritance
-- Operator overloading
-- Namespaces (std::)
+### Complex Language (Rust)
+- Operators need highlighting
+- Lifetimes with '
+- Macros with !
+- Multiple string types
+- Type system
+- **Needs all 11 classes**: keyword, string, comment, class, function, builtin, number, boolean, decorator, operator, variable
 
 ---
 
@@ -630,12 +758,23 @@ darkSyntax.registerLanguage('yourlang', {
 ## Quick Reference Card
 
 ```javascript
+// File structure order:
+// 1. Language documentation (comments)
+// 2. NOTES ON SYNTAX section
+// 3. SAMPLE CODE in /* */ blocks
+// 4. LANGUAGE SYNTAX CONFIGURATION
+
+// 11 available classes (use what you need):
+// keyword, string, comment, class, function,
+// builtin, number, boolean, decorator, operator, variable
+
 // Priority order (higher first):
 // 100+  Comments
 // 90+   Strings
 // 70-89 Decorators
 // 60-69 Classes
-// 50-59 Keywords
+// 55-59 Operators (modern languages)
+// 50-54 Keywords
 // 40-49 Builtins
 // 30-45 Functions
 // 20-29 Numbers/Booleans
@@ -651,14 +790,17 @@ pattern: /\bword\b/g
 // Handle escapes in strings
 pattern: /"(?:[^"\\]|\\.)*"/g
 
+// Prevent cross-line string matching
+pattern: /"(?:[^"\\\n]|\\.)*"/g
+
 // Use captureGroup to highlight part of match
 pattern: /function\s+(\w+)/g,
 captureGroup: 1
 
 // Test: Comments → Strings → Keywords
+// Remember: Simple languages don't need all 11 classes!
 ```
 
 ---
 
-*Last updated: 2025*
-*DarkSyntax Version: 1.0*
+*Last updated: 20251013*
